@@ -17,11 +17,12 @@ There are 4 parameters that should be adjusted based on what you are using the m
 4. eval_other_lang
 
 
-1. If train mode is True then the model will be trained.
 
-2. If single_track is True, then only the prosodic features of the user speaking will be used.
+**train mode** if is True, then the model will be trained.
 
-3. If balanced_eval is True, then the model will evaluated on a balanced dataset where half of the frames are location frames, and the other half are frames with speech that don't have a location mention.
+**single_track** if is True, then only the prosodic features of the user speaking will be used.
 
-4. If eval_other_lang is True, then the model will be evaluated over data from another language, as specified in the mat_path variable
+**balanced_eval** if is True, then the model will evaluated on a balanced dataset where half of the frames are location frames, and the other half are frames with speech that don't have a location mention.
+
+**eval_other_lang** if is True, then the model will be evaluated over data from another language, as specified in the mat_path variable
 
