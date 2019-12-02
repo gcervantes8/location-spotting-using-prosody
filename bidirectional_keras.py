@@ -12,6 +12,7 @@ from evaluate_balance import evaluation_on_balanced
 from lang_fail_analysis import lang_fail_analysis, random_points_lang
 from failure_analysis import failure_analysis
 import keras
+
 # Hyper-params
 learning_rate = 0.001
 #training_steps = 1200
@@ -25,7 +26,7 @@ timesteps = 200  # 60 sec * 20 frames/sec = 1200
 #keep_prob_value = 0.6
 num_layers = 2
 train_mode = False
-single_track_train = False
+single_track = False
 balanced_eval = False
 eval_other_lang = True
 
@@ -35,7 +36,7 @@ num_output_units = 1
 
 # Reading data
 print("Reading data...")
-if not single_track_train:
+if not single_track:
     model_path = 'Location_full_model_180_2_track_2720-14-7-7-4.h5'
 else:
     model_path = 'Location_full_model_270_1_track_2759-14-7-7-4.h5' #270
@@ -46,7 +47,7 @@ if eval_other_lang:
     output_file_name = 'English-SBC.txt'
     #mat_path = './RNN-jp-callhome-10s.mat'
     #mat_path = './RNN-Spanish-callhome-10s.mat'
-    #mat_path = './RNN-2500-to-4940-spacy.mat'
+    mat_path = './RNN-2500-to-4940-spacy.mat'
     #mat_path = './RNN-EnglishNewsBroadcasts-Cleaned.mat'
     mat = sio.loadmat(mat_path)
     feats = mat['testFeatures']
@@ -66,7 +67,7 @@ else:
     y_dev = y_dev[indices]
     x_dev = mat['devFeatures'][indices]
     is_speaking_dev = mat['devIsSpeaking'][indices]
-    if single_track_train:
+    if single_track:
         x_dev = x_dev[:,:,:5]
 
     if train_mode:
@@ -78,7 +79,7 @@ else:
         y_dev = np.expand_dims(y_dev, axis = 2)
         y_train = np.expand_dims(y_train, axis = 2)
 
-        if single_track_train:
+        if single_track:
             x_train = x_train[:,:,:5]
 
     else:
@@ -95,7 +96,7 @@ else:
         test_audio_files = mat['testAudioFile'][indices]
         test_times = mat['testTimes'][indices]
         ne_labels = mat['testIsNamedEntity'][indices]
-        if single_track_train:
+        if single_track:
             x_features = x_features[:,:,:5]
 
 
@@ -198,7 +199,7 @@ else:
                     self.best_f1_scores[smallest_index] = f1
                     print('Saved top 3 model, epoch', str(self.epoch))
                     n_tracks = 2
-                    if single_track_train:
+                    if single_track:
                         n_tracks = 1
                     model.save('./Location_Full_Model_' + str(self.epoch) + '_'  + str(n_tracks) + '_track.h5')
                     
