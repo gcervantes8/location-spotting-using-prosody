@@ -26,6 +26,7 @@ the Tensorflow.keras.layers call of CuDNNLSTM should be changed to Tensorflow.ke
 
 ### Computing features
 The prosodic features used in the research paper were computed using the Mid-level prosodic feature toolkit, found [here](https://github.com/nigelgward/midlevel)
+
 Labels are found using *spaCy* (Python library).  *SpaCy* can find whether a word is a location mention.  Matlab can run python code.
 
 Features and labels are saved into a *.mat* file with variables
@@ -36,6 +37,7 @@ Features and labels are saved into a *.mat* file with variables
 * testLabels
 
 **Features** are 3-dimensional of size *\[num. of samples, num. of timesteps, num. of features\]*
+
 **Labels** are 2-dimensional of size *\[num. of samples, num. of timesteps\]*, value 1 if location mention, 0 otherwise
 
 
@@ -43,8 +45,11 @@ Features and labels are saved into a *.mat* file with variables
 * testIsFunctionWord
 
 To compute the three baselines from the research paper, you'll need these 2 variables set.  
+
 Both variables resized to be 2-dimensional of size *\[num. of samples, num. of timesteps\]* with value 1 or 0
+
 **IsSpeaking** is 1 if there is speech, 0 otherwise.  These can be gotten from the word-aligned transcripts
+
 **IsFunctionWord** is 1 if is a function word, 0 otherwise.  Using word-aligned transcripts and NLTK stopword list. 
 
 
@@ -69,4 +74,5 @@ There are 4 parameters that should be adjusted, depending on what the code is be
 
 ### Research paper authors
 Gerardo Cervantes
+
 Nigel G. Ward
